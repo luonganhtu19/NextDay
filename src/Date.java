@@ -69,6 +69,9 @@ public class Date implements Month,Day,Year {
                         month=1;
                         day=1;
                         year=increaseOneUnit(year);
+                    }else {
+                        month=increaseOneUnit(month);
+                        day=1;
                     }
                     break;
                 }
@@ -102,15 +105,8 @@ public class Date implements Month,Day,Year {
         boolean dividedByFour       = year%4==0;
         boolean dividedByOneHunderd = year%100==0;
         boolean dividedByFourHunderd= year%400==0;
-
-        if (dividedByFour){
-            if (dividedByOneHunderd&&dividedByFourHunderd){
-                return true;
-            }else if (dividedByOneHunderd){
-                return false;
-            }
-            return true;
-        }
+        if (dividedByFourHunderd) return true;
+        if (dividedByFour&& !dividedByOneHunderd) return true;
         return false;
     }
     public int increaseOneUnit(int value){
